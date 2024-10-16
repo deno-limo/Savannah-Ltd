@@ -19,9 +19,7 @@ describe("searching items on albums", () => {
       .should("exist")
       .and("be.visible");
 
-    cy.get(
-      '[style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;"] > :nth-child(3)'
-    )
+      cy.get('[style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;"] > div')
       .should("exist")
       .and("be.visible")
       .and("have.text", "omnis laborum odio");

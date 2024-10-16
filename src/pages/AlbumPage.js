@@ -7,35 +7,31 @@ const AlbumPage = () => {
   const [albums, setAlbums] = useState([]);
   const [filteredAlbums, setFilteredAlbums] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate(); // Hook to navigate to other pages
+  const navigate = useNavigate();
 
-  // Fetch albums on component mount
   useEffect(() => {
     const fetchAlbums = async () => {
       const response = await axios.get(
         "https://jsonplaceholder.typicode.com/albums"
       );
       setAlbums(response.data);
-      setFilteredAlbums(response.data); // Set filtered albums initially to all albums
+      setFilteredAlbums(response.data);
     };
     fetchAlbums();
   }, []);
 
-  // Handle search input
   const handleSearch = (event) => {
     const term = event.target.value.toLowerCase();
     setSearchTerm(term);
 
-    // Filter albums based on the search term (title)
     const filtered = albums.filter((album) =>
       album.title.toLowerCase().includes(term)
     );
     setFilteredAlbums(filtered);
   };
 
-  // Handle navigation back to the Home page
   const handleBack = () => {
-    navigate("/"); // Navigate to the home page
+    navigate("/");
   };
 
   return (
@@ -79,7 +75,7 @@ const AlbumPage = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", // Responsive grid
+          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
           gap: "20px",
         }}
       >
