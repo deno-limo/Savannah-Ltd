@@ -12,18 +12,16 @@ const PhotoPage = () => {
       const response = await axios.get(
         "https://jsonplaceholder.typicode.com/photos"
       );
-      setPhotos(response.data.slice(0, 20)); // Limit to 20 photos
-      setFilteredPhotos(response.data.slice(0, 20)); // Set initial filtered photos
+      setPhotos(response.data.slice(0, 20));
+      setFilteredPhotos(response.data.slice(0, 20));
     };
     fetchPhotos();
   }, []);
 
-  // Handle search input
   const handleSearch = (event) => {
     const term = event.target.value.toLowerCase();
     setSearchTerm(term);
 
-    // Filter photos based on the search term (title)
     const filtered = photos.filter((photo) =>
       photo.title.toLowerCase().includes(term)
     );

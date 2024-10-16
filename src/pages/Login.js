@@ -1,37 +1,35 @@
 // src/pages/Login.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { login } from '../firebase/firebase'; // Assuming you have this login function
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../firebase/firebase";
 
 const Login = ({ setIsAuthenticated }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccessMessage('');
+    setError("");
+    setSuccessMessage("");
 
     try {
-      await login(email, password); // Log in the user
+      await login(email, password);
 
-      // Update authentication state
       setIsAuthenticated(true);
-      // Optionally store this in localStorage to persist across reloads
-      localStorage.setItem('isAuthenticated', 'true');
 
-      setSuccessMessage('Successfully logged in!');
+      localStorage.setItem("isAuthenticated", "true");
+
+      setSuccessMessage("Successfully logged in!");
       setTimeout(() => {
-        navigate('/home'); // Redirect to Home after 1 second
+        navigate("/home"); // Redirect to Home after 1 second
       }, 1000);
     } catch (err) {
-      setError('Invalid email or password.');
+      setError("Invalid email or password.");
     }
   };
-  
 
   return (
     <div style={styles.container}>
@@ -65,9 +63,16 @@ const Login = ({ setIsAuthenticated }) => {
           {error && <p style={styles.error}>{error}</p>}
 
           {/* Display Success Message */}
-          {successMessage && <p style={styles.successMessage}>{successMessage}</p>}
+          {successMessage && (
+            <p style={styles.successMessage}>{successMessage}</p>
+          )}
 
-          <button id="logIn" type="submit" style={styles.loginButton} disabled={!email || !password}>
+          <button
+            id="logIn"
+            type="submit"
+            style={styles.loginButton}
+            disabled={!email || !password}
+          >
             Login
           </button>
         </form>
@@ -76,55 +81,54 @@ const Login = ({ setIsAuthenticated }) => {
   );
 };
 
-// Inline styles for simplicity
 const styles = {
   container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh', // Full viewport height
-    backgroundColor: '#f0f4f8', // Optional background color
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#f0f4f8",
   },
   loginBox: {
-    backgroundColor: 'white',
-    padding: '20px',
-    borderRadius: '8px',
-    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-    textAlign: 'center',
-    width: '300px', // Set a width for the login box
+    backgroundColor: "white",
+    padding: "20px",
+    borderRadius: "8px",
+    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+    textAlign: "center",
+    width: "300px",
   },
   form: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
   },
   inputGroup: {
-    marginBottom: '15px',
-    textAlign: 'left',
+    marginBottom: "15px",
+    textAlign: "left",
   },
   input: {
-    padding: '10px',
-    width: '100%', // Full width of the parent container
-    borderRadius: '4px',
-    border: '1px solid #ccc',
+    padding: "10px",
+    width: "100%",
+    borderRadius: "4px",
+    border: "1px solid #ccc",
   },
   loginButton: {
-    padding: '10px',
-    backgroundColor: '#007BFF',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    marginTop: '10px',
+    padding: "10px",
+    backgroundColor: "#007BFF",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    marginTop: "10px",
   },
   error: {
-    color: 'red',
-    fontSize: '14px',
-    marginBottom: '10px',
+    color: "red",
+    fontSize: "14px",
+    marginBottom: "10px",
   },
   successMessage: {
-    color: 'green',
-    fontSize: '14px',
-    marginBottom: '10px',
+    color: "green",
+    fontSize: "14px",
+    marginBottom: "10px",
   },
 };
 
