@@ -42,6 +42,7 @@ const Navbar = ({ isAuthenticated, handleLogout}) => {
       <AppBar position="static">
         <Toolbar>
           <IconButton
+            id="hamburgerMenu"
             size="large"
             edge="start"
             color="inherit"
